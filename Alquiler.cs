@@ -1,24 +1,35 @@
-﻿using System;
-
-class Vehiculo
+﻿// Clase Alquiler
+public class Alquiler
 {
-    // Atributos
-    public string Marca { get; set; }
+
+    private static int contador = 0;
+    public int ID { get; }
+    public Vehiculo Vehiculo { get; set; }
+    public DateTime FechaInicio { get; set; }
+    public DateTime FechaFin { get; set; }
+    public double KilometrosRecorridos { get; set; }
     public string Placa { get; set; }
-    public int Año { get; set; }
-    public string Modelo { get; set; }
-    public bool Disponible { get; set; }
-    public bool Seleccionado { get; set; }
 
     // Constructor
-    public Vehiculo(string marca, string placa, int año, string modelo, bool disponible, bool seleccionado)
+    public Alquiler(Vehiculo vehiculo, DateTime fechaInicio, DateTime fechaFin, double kilometrosRecorridos)
     {
-        Marca = marca;
-        Placa = placa;
-        Año = año;
-        Modelo = modelo;
-        Disponible = disponible;
-        Seleccionado = seleccionado;
+        Vehiculo = vehiculo;
+        FechaInicio = fechaInicio;
+        FechaFin = fechaFin;
+        KilometrosRecorridos = kilometrosRecorridos;
+        contador += 1;
+        ID = contador;
+        Placa = vehiculo.Placa;
+
+        // Añadir a la lista utilizando el gestor de alquileres
+        GestorAlquileres.AgregarAlquiler(this);
     }
 
+    /*public double CalcularImporte()
+    {
+        // Lógica para calcular el importe según las reglas especificadas
+        // ...
+
+        return 2.3;
+    }*/
 }
