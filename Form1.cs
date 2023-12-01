@@ -21,8 +21,8 @@ namespace drawio
             // Obtener la fecha y hora actual
             DateTime now = DateTime.Now;
             // Iniciar con alquileres
-            new Alquiler(vehiculo2, now, now.AddDays(1), 200.5);
-            new Alquiler(vehiculo4, now, now.AddDays(2), 150.0);
+            new Alquiler("Carlos", vehiculo2, now, now.AddDays(1), 200.5, 0);
+            new Alquiler("Fernando", vehiculo4, now, now.AddDays(2), 150.0, 0);
             // Llenamos datos
             cargarTablaVehiculos();
             cargarTablaVehiculosAlquilados();
@@ -38,6 +38,11 @@ namespace drawio
             columnaNumero.HeaderText = "#";
             tablaAlquilados.Columns.Add(columnaNumero);
 
+            DataGridViewTextBoxColumn columnaCliente = new DataGridViewTextBoxColumn();
+            columnaCliente.DataPropertyName = "Cliente";
+            columnaCliente.HeaderText = "Cliente";
+            tablaAlquilados.Columns.Add(columnaCliente);
+
             DataGridViewTextBoxColumn columnaPlaca = new DataGridViewTextBoxColumn();
             columnaPlaca.DataPropertyName = "Placa";
             columnaPlaca.HeaderText = "Placa";
@@ -52,6 +57,11 @@ namespace drawio
             columnaFechaFin.DataPropertyName = "FechaFin";
             columnaFechaFin.HeaderText = "Fecha Fin";
             tablaAlquilados.Columns.Add(columnaFechaFin);
+
+            DataGridViewTextBoxColumn columnaValorPagar = new DataGridViewTextBoxColumn();
+            columnaValorPagar.DataPropertyName = "ValorPagar";
+            columnaValorPagar.HeaderText = "Valor pagado";
+            tablaAlquilados.Columns.Add(columnaValorPagar);
 
             // Propiedades de la tabla
             tablaAlquilados.AutoGenerateColumns = false;
@@ -143,6 +153,7 @@ namespace drawio
             indexTablaAlquilerSeleccionada = e.RowIndex;
             // Habilitar boton para eliminar
             btnEliminarAlquiler.Enabled = true;
+            btnEntregar.Enabled = true;
         }
 
         private void btnEliminarAlquiler_Click(object sender, EventArgs e)
@@ -192,6 +203,28 @@ namespace drawio
             cargarTablaVehiculosAlquilados();
 
             btnAgregarAlquiler.Enabled = false;
+        }
+
+        private void btnEntregar_Click(object sender, EventArgs e)
+        {
+            btnEliminarAlquiler.Enabled = false;
+
+            // Consultamos la lista de vehiculos
+            List<Alquiler> listaAlquileres = GestorAlquileres.ListaDeAlquileres;
+
+            // Selecciono el que puse en el tabla
+            Alquiler alquilerSeleccionado = listaAlquileres[indexTablaAlquilerSeleccionada];
+
+            // Nueva instancia del formulario emergente
+            FormEntregar ventana = new FormEntregar(alquilerSeleccionado);
+
+            // Mostrar el formulario emergente de manera modal
+            ventana.ShowDialog();
+
+            // Recargar otra vez la tabla Alquileres
+            cargarTablaVehiculosAlquilados();
+
+            btnEntregar.Enabled = false;
         }
     }
 

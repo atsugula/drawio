@@ -36,6 +36,7 @@
             btnEliminarVehiculo = new Button();
             btnAgregarAlquiler = new Button();
             btnEliminarAlquiler = new Button();
+            btnEntregar = new Button();
             ((System.ComponentModel.ISupportInitialize)tablaVehiculos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tablaAlquilados).BeginInit();
             SuspendLayout();
@@ -115,7 +116,7 @@
             // btnEliminarAlquiler
             // 
             btnEliminarAlquiler.Enabled = false;
-            btnEliminarAlquiler.Location = new Point(791, 309);
+            btnEliminarAlquiler.Location = new Point(791, 345);
             btnEliminarAlquiler.Name = "btnEliminarAlquiler";
             btnEliminarAlquiler.Size = new Size(75, 23);
             btnEliminarAlquiler.TabIndex = 7;
@@ -123,11 +124,23 @@
             btnEliminarAlquiler.UseVisualStyleBackColor = true;
             btnEliminarAlquiler.Click += btnEliminarAlquiler_Click;
             // 
+            // btnEntregar
+            // 
+            btnEntregar.Enabled = false;
+            btnEntregar.Location = new Point(791, 300);
+            btnEntregar.Name = "btnEntregar";
+            btnEntregar.Size = new Size(75, 23);
+            btnEntregar.TabIndex = 8;
+            btnEntregar.Text = "Entregar Vehiculo";
+            btnEntregar.UseVisualStyleBackColor = true;
+            btnEntregar.Click += btnEntregar_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(900, 430);
+            Controls.Add(btnEntregar);
             Controls.Add(btnEliminarAlquiler);
             Controls.Add(btnAgregarAlquiler);
             Controls.Add(btnEliminarVehiculo);
@@ -154,5 +167,6 @@
         private Button btnEliminarVehiculo;
         private Button btnAgregarAlquiler;
         private Button btnEliminarAlquiler;
+        private Button btnEntregar;
     }
 }
